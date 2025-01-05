@@ -12,8 +12,6 @@ import {
   isSameDay,
 } from "date-fns";
 import EventCard from "./EventCard";
-import Edit from "../assets/edit.png";
-import Delete from "../assets/delete.png";
 import Meet from "../assets/meet.png";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faDownload, faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
@@ -280,7 +278,8 @@ const Calendar = () => {
   const [allEvents, setAllEvents] = useState([]);
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [meetingData,setMeetigData] = useState([]);
+  const [meetingData,setMeetingData ] = useState([]);
+  const [selectedEventId, setSelectedEventId] = useState(null);
 
   useEffect(() => {
     fetch("/calendarfromtoenddate.json")
@@ -386,12 +385,11 @@ const Calendar = () => {
     );
   
     if (overlappingEvents.length === 1) {
-      // Open modal directly for a single event
       setSelectedEvent(null); // Ensure popover is closed
       setIsModalOpen(true);
-      setMeetigData(overlappingEvents[0]);
+      setMeetingData (overlappingEvents[0]);
+      setSelectedEventId(overlappingEvents[0].id);
     } else {
-      // Display popover for multiple events
       setSelectedEvent({
         events: overlappingEvents,
         position: {
@@ -399,6 +397,7 @@ const Calendar = () => {
           left: rect.left + rect.width + 10,
         },
       });
+      setSelectedEventId(clickedEvent.id);
     }
   };
   
@@ -410,6 +409,7 @@ const Calendar = () => {
         !event.target.closest(".popover") && !event.target.closest(".modal-content")
       ) {
         setSelectedEvent(null);
+        setSelectedEventId(null);
       }
     };
     
@@ -422,7 +422,7 @@ const Calendar = () => {
   const handleMeeting=(events)=>{
     setIsModalOpen(true);
     console.log('dataEvent',events);
-    setMeetigData(events)
+    setMeetingData (events)
   }
   return (
     <>
@@ -531,7 +531,8 @@ const Calendar = () => {
                               parseISO(firstEvent.start),
                               "HH:mm"
                             )} - ${format(parseISO(firstEvent.end), "HH:mm")}`}
-                            highlight={eventsInSlot.length}
+                            highlightNumber={eventsInSlot.length}
+                            highlight={selectedEventId === firstEvent.id} // Highlight if selected
                             viewMode={viewMode}
                           />
                         </EventContainer>
