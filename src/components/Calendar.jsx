@@ -16,7 +16,7 @@ import Edit from "../assets/edit.png";
 import Delete from "../assets/delete.png";
 import Meet from "../assets/meet.png";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye, faDownload } from '@fortawesome/free-solid-svg-icons';
+import { faEye, faDownload, faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 // Styled Components
 const CalendarWrapper = styled.div`
@@ -198,7 +198,7 @@ const ModalOverlay = styled.div`
 
 const ModalContent = styled.div.attrs(() => ({ className: "modal-content" }))`
   background: #fff;
-  padding: 20px;
+  padding: 10px;
   width: 400px;
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
@@ -561,8 +561,9 @@ const Calendar = () => {
                   {event.user_det.job_id.jobRequest_Title}
                 </h4>
                 <div>
-                  <img src={Edit} style={{ width: "0.8rem", paddingLeft: "0.5rem" }} />
-                  <img src={Delete} style={{ width: "0.8rem", paddingLeft: "0.5rem" }} />
+                  {/* <img src={Edit} style={{ width: "0.8rem", paddingLeft: "0.5rem" }} /> */}
+                  <FontAwesomeIcon icon={faEdit} style={{paddingLeft: "0.5rem",color:"#000",fontSize:'12px'}}/>
+                  <FontAwesomeIcon icon={faTrash} style={{paddingLeft: "0.5rem",color:"red",fontSize:'12px'}}/>
                 </div>
               </div>
               <p style={{ fontSize: "0.7rem" }}>
@@ -581,63 +582,65 @@ const Calendar = () => {
 
 <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
         {meetingData && (
-          <div style={{display:'flex',justifyContent:'space-evenly',border:'1px solid grey',padding:'1rem'}}>
+          <div style={{display:'flex',justifyContent:'space-around',alignItems:"center",border: '1px solid #d9d1d1',padding:'1rem'}}>
             <div>
             <p style={{fontSize:'0.8rem',lineHeight:'30px'}}>Interview With: {meetingData?.user_det?.handled_by?.firstName}</p>
             <p style={{fontSize:'0.8rem',lineHeight:'30px'}}>Position: {meetingData?.user_det?.job_id?.jobRequest_Title}</p>
-            <p style={{fontSize:'0.8rem',lineHeight:'30px'}}>Date: {meetingData?.start ? format(parseISO(meetingData.start), 'dd MM yyyy') : 'N/A'}</p>
+            <p style={{fontSize:'0.8rem',lineHeight:'30px'}}>Created By: -</p>
+            <p style={{fontSize:'0.8rem',lineHeight:'30px'}}>Interview Date: {meetingData?.start ? format(parseISO(meetingData.start), 'dd MM yyyy') : 'N/A'}</p>
             <p style={{fontSize:'0.8rem',lineHeight:'30px'}}>
-              Time: {meetingData?.start && meetingData?.end
+            Interview Time: {meetingData?.start && meetingData?.end
             ? `${format(parseISO(meetingData.start), 'HH:mm')} - ${format(parseISO(meetingData.end), 'HH:mm')}`
             : 'N/A'}
             </p>
             <p style={{fontSize:'0.8rem',lineHeight:'30px'}}>Interview Via: Google Meet</p>
             <button style={{
-  display: 'flex',
-  justifyContent: 'space-between',
-  alignItems: 'center',
-  width: '100%',
-  padding: '0.5rem',
-  borderRadius: '0.25rem',
-  background: 'transparent',
-  color: 'rgb(0, 109, 191)',
-  border: '1px solid rgb(0, 109, 191)',
-  height: '1.5rem',
-  fontSize: '0.9rem',
-  cursor: 'pointer',
-}}>
-  <span style={{ textAlign: 'left' }}>Resume.docx</span>
-  <div style={{ display: 'flex', gap: '0.5rem' }}>
-    <FontAwesomeIcon icon={faEye} />
-    <FontAwesomeIcon icon={faDownload} />
-  </div>
-</button>
-<button style={{
-  display: 'flex',
-  justifyContent: 'space-between',
-  alignItems: 'center',
-  width: '100%',
-  padding: '0.5rem',
-  borderRadius: '0.25rem',
-  background: 'transparent',
-  color: 'rgb(0, 109, 191)',
-  border: '1px solid rgb(0, 109, 191)',
-  height: '1.5rem',
-  fontSize: '0.9rem',
-  cursor: 'pointer',
-  marginTop:'0.25rem'
-}}>
-  <span style={{ textAlign: 'left' }}>AadharCard</span>
-  <div style={{ display: 'flex', gap: '0.5rem' }}>
-    <FontAwesomeIcon icon={faEye} />
-    <FontAwesomeIcon icon={faDownload} />
-  </div>
-</button>
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            width: '100%',
+            padding: '0.5rem',
+            borderRadius: '0.25rem',
+            background: 'transparent',
+            color: 'rgb(0, 109, 191)',
+            border: '1px solid rgb(0, 109, 191)',
+            height: '1.5rem',
+            fontSize: '0.9rem',
+            cursor: 'pointer',
+            marginTop:'0.5rem'
+          }}>
+              <span style={{ textAlign: 'left' }}>Resume.docx</span>
+              <div style={{ display: 'flex', gap: '0.5rem' }}>
+                <FontAwesomeIcon icon={faEye} />
+                <FontAwesomeIcon icon={faDownload} />
+              </div>
+            </button>
+            <button style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              width: '100%',
+              padding: '0.5rem',
+              borderRadius: '0.25rem',
+              background: 'transparent',
+              color: 'rgb(0, 109, 191)',
+              border: '1px solid rgb(0, 109, 191)',
+              height: '1.5rem',
+              fontSize: '0.9rem',
+              cursor: 'pointer',
+              marginTop:'0.5rem'
+            }}>
+              <span style={{ textAlign: 'left' }}>AadharCard</span>
+              <div style={{ display: 'flex', gap: '0.5rem' }}>
+                <FontAwesomeIcon icon={faEye} />
+                <FontAwesomeIcon icon={faDownload} />
+              </div>
+            </button>
             </div>
             <div>
-              <img src={Meet} alt="meet" style={{width:"7.5rem"}}/>
+              <img src={Meet} alt="meet" style={{width:"5.5rem",border: '1px solid #d9d1d1',}}/>
               <a style={{display: 'block',
-              marginLeft: '1rem',
+              margin: '0.5rem 0.8rem',
               background: 'rgb(0, 109, 191)',
               color: 'rgb(255, 255, 255)',
               padding: '0.5rem 0rem',
