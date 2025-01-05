@@ -399,6 +399,36 @@ const Calendar = () => {
       });
       setSelectedEventId(clickedEvent.id);
     }
+    if (viewMode === "Month") {
+      // For Month View: Display all events for the clicked date
+      const eventsForDay = allEvents.filter((event) =>
+        isSameDay(parseISO(event.start), parseISO(clickedEventOrDay.fullDate))
+      );
+  
+      setSelectedEvent({
+        events: eventsForDay,
+        position: {
+          top: rect.bottom + 5, // Adjust position for the popover
+          left: rect.left,
+        },
+      });
+    } else {
+      // For Day/Week Views: Display only events for the specific time slot
+      const eventsForTimeSlot = allEvents.filter(
+        (event) =>
+          isSameDay(parseISO(event.start), parseISO(clickedEventOrDay.start)) &&
+          event.start === clickedEventOrDay.start
+      );
+  
+      setSelectedEvent({
+        events: eventsForTimeSlot,
+        position: {
+          top: rect.bottom + 5,
+          left: rect.left,
+        },
+      });
+    }
+    
   };
   
 
@@ -562,7 +592,6 @@ const Calendar = () => {
                   {event.user_det.job_id.jobRequest_Title}
                 </h4>
                 <div>
-                  {/* <img src={Edit} style={{ width: "0.8rem", paddingLeft: "0.5rem" }} /> */}
                   <FontAwesomeIcon icon={faEdit} style={{paddingLeft: "0.5rem",color:"#000",fontSize:'12px'}}/>
                   <FontAwesomeIcon icon={faTrash} style={{paddingLeft: "0.5rem",color:"red",fontSize:'12px'}}/>
                 </div>
