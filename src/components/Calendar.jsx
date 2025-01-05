@@ -479,7 +479,7 @@ const Calendar = () => {
                       parseISO(event.end),
                       "HH:mm"
                     )}`}
-                    highlight={eventsForDay.length}
+                    highlightNumber={eventsForDay.length}
                     viewMode="Month"
                   />
                 ))}
