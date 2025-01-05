@@ -382,8 +382,14 @@ const Calendar = () => {
       (event) =>
         event.start === clickedEvent.start && event.end === clickedEvent.end
     );
-
-    if (selectedEvent === null) {
+  
+    if (overlappingEvents.length === 1) {
+      // Open modal directly for a single event
+      setSelectedEvent(null); // Ensure popover is closed
+      setIsModalOpen(true);
+      setMeetigData(overlappingEvents[0]);
+    } else {
+      // Display popover for multiple events
       setSelectedEvent({
         events: overlappingEvents,
         position: {
@@ -391,10 +397,9 @@ const Calendar = () => {
           left: rect.left + rect.width + 10,
         },
       });
-    } else {
-      setSelectedEvent(null);
     }
   };
+  
 
   useEffect(() => {
     const handleClickOutside = (event) => {
