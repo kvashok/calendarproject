@@ -15,6 +15,8 @@ import EventCard from "./EventCard";
 import Edit from "../assets/edit.png";
 import Delete from "../assets/delete.png";
 import Meet from "../assets/meet.png";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faDownload } from '@fortawesome/free-solid-svg-icons';
 
 // Styled Components
 const CalendarWrapper = styled.div`
@@ -590,8 +592,47 @@ const Calendar = () => {
             : 'N/A'}
             </p>
             <p style={{fontSize:'0.8rem',lineHeight:'30px'}}>Interview Via: Google Meet</p>
-            <button style={{display:'block',width:'10rem',borderRadius:'0.25rem',background:'transparent',color:'rgb(0, 109, 191)',border:'1px solid rgb(0, 109, 191)',height:"1.5rem"}}>Resume.docx</button>
-            <button style={{display:'block',width:'10rem',borderRadius:'0.25rem',background:'transparent',color:'rgb(0, 109, 191)',border:'1px solid rgb(0, 109, 191)',height:"1.5rem",marginTop:'0.25rem'}}>AadharCard</button>
+            <button style={{
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  width: '100%',
+  padding: '0.5rem',
+  borderRadius: '0.25rem',
+  background: 'transparent',
+  color: 'rgb(0, 109, 191)',
+  border: '1px solid rgb(0, 109, 191)',
+  height: '1.5rem',
+  fontSize: '0.9rem',
+  cursor: 'pointer',
+}}>
+  <span style={{ textAlign: 'left' }}>Resume.docx</span>
+  <div style={{ display: 'flex', gap: '0.5rem' }}>
+    <FontAwesomeIcon icon={faEye} />
+    <FontAwesomeIcon icon={faDownload} />
+  </div>
+</button>
+<button style={{
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  width: '100%',
+  padding: '0.5rem',
+  borderRadius: '0.25rem',
+  background: 'transparent',
+  color: 'rgb(0, 109, 191)',
+  border: '1px solid rgb(0, 109, 191)',
+  height: '1.5rem',
+  fontSize: '0.9rem',
+  cursor: 'pointer',
+  marginTop:'0.25rem'
+}}>
+  <span style={{ textAlign: 'left' }}>AadharCard</span>
+  <div style={{ display: 'flex', gap: '0.5rem' }}>
+    <FontAwesomeIcon icon={faEye} />
+    <FontAwesomeIcon icon={faDownload} />
+  </div>
+</button>
             </div>
             <div>
               <img src={Meet} alt="meet" style={{width:"7.5rem"}}/>
