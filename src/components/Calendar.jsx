@@ -402,9 +402,9 @@ const Calendar = () => {
     if (viewMode === "Month") {
       // For Month View: Display all events for the clicked date
       const eventsForDay = allEvents.filter((event) =>
-        isSameDay(parseISO(event.start), parseISO(clickedEventOrDay.fullDate))
+        isSameDay(parseISO(event.start), parseISO(clickedEvent.fullDate))
       );
-  
+
       setSelectedEvent({
         events: eventsForDay,
         position: {
@@ -496,7 +496,7 @@ const Calendar = () => {
             );
 
             return (
-              <DateCell key={index}>
+              <DateCell key={index} onClick={(e) => handleEventClick(day, e)} >
                 <div className="date-number">
                   {parseInt(day.fullDate.split("-")[2], 10)}
                 </div>
