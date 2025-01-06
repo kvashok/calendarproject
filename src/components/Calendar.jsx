@@ -408,8 +408,8 @@ const Calendar = () => {
       setSelectedEvent({
         events: eventsForDay,
         position: {
-          top: rect.bottom + 5, // Adjust position for the popover
-          left: rect.left,
+          top: rect.top + window.scrollY,
+          left: rect.left + rect.width + 10,
         },
       });
     } else {
